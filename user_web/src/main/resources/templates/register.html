@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base href="http://localhost:8080/" />
+    <base href="">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>注册账号</h1>
+<form action="/user/register" method="post">
+<table>
+    <tr>
+        <td>账号</td>
+        <td><input type="text" name="account" id="account"></td>
+    </tr>
+    <tr>
+        <td>密码</td>
+        <td><input type="text" name="password" id="password"></td>
+    </tr>
+    <tr>
+        <td>昵称</td>
+        <td><input type="text" name="username" id="username"></td>
+    </tr>
+    <tr>
+        <td>邮箱</td>
+        <td><input type="text" name="email" id="email"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="button" onclick="sendCode()" value="点击获取验证码"/></td>
+    </tr>
+    <tr>
+        <td>验证码：</td>
+        <td><input type="text" name="code" id="code"></td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="注册"></td>
+    </tr>
+</table>
+</form>
+
+<script src="/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    function sendCode() {
+        var email = $("#email").val();
+
+        var isEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+        if(email == "" || email == null){
+            alert("邮箱不能为空！")
+        }
+        else if(!(isEmail.test(email))){
+            alert("邮箱格式不正确");
+        }
+        else {
+
+            $.ajax({
+                type: "GET",
+                url:"user/sendCode?email="+email,
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+
+            });
+        }
+    }
+
+    /*function register() {
+        $.ajax({
+            type: "POST",
+            url: "user/register",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data:JSON.stringify({
+                "account":$("#account").val(),
+                "password":$("#password").val(),
+                "username":$("#username").val(),
+                "email":$("#email").val(),
+                "code":$("#code").val()
+            }),
+            success:function (message) {
+               console.log(message)
+            },
+            error:function (message) {
+                console.log(message)
+            }
+        });
+    }*/
+
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+spring:
+  mail:
+    protocol: smtp
+    host: smtp.sina.com
+    username: t1039546957@sina.com
+    password: a2977256
+server:
+  port: 8081
+dubbo:
+  registry:
+    address: zookeeper://192.168.8.188:2181
+  application:
+    name: user_mail
+  protocol:
+    port: -1
+  consumer:
+    check: false
